@@ -1,2 +1,3 @@
 (library
- (name french))
+ (name french)
+ (modules sat parser))
