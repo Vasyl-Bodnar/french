@@ -1,0 +1,12 @@
+lib: [
+  "_build/install/default/lib/french/META"
+  "_build/install/default/lib/french/dune-package"
+  "_build/install/default/lib/french/opam"
+]
+bin: [
+  "_build/install/default/bin/french"
+]
+doc: [
+  "_build/install/default/doc/french/LICENSE"
+  "_build/install/default/doc/french/README.md"
+]

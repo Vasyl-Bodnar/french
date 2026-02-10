@@ -24,7 +24,7 @@ let input_opt = ref NoInput
 
 let temp = ref 1.0
 
-let iters = ref 100
+let iters = ref 10000
 
 let verbose = ref false
 
@@ -63,6 +63,7 @@ let run_anneal parser =
 
 let () =
   Arg.parse spec anon usage ;
+  Random.self_init () ;
   match !input_opt with
   | Str s ->
       run_anneal @@ parse_dimacs s

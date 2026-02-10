@@ -33,5 +33,10 @@ Note that this is simulated annealing only at the moment.
 It can find SAT, but it is unable to give UNSAT, only UNKNOWN with a minimum number of unsatisfied clauses it could find.
 This can be useful for Max-SAT however, and is essentially timeout.
 
+## Benchmark
+This repo includes some lighter SAT benchmarks of Holger H. Hoos for SATLIB.
+From my testing, `french` generally can do well on these, but there are plenty of times where it times out too fast.
+More optimization and improvements to be seen, especially if CLDL or other SAT solving algorithm are implemented.
+
 ## License
 This project is licensed under MPL Version 2.0.

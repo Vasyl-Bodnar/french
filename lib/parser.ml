@@ -11,6 +11,7 @@ type state =
   | HeaderCN
   | HeaderCNF
   | HeaderVars
+  | HeaderClausesInit
   | HeaderClauses
   | ClauseInit
   | VarInit
@@ -70,7 +71,15 @@ let parse_dimacs s =
             ; num_vars=
                 (parser.num_vars * 10) + (int_of_char c - int_of_char '0') }
         | _ ->
-            {parser with state= HeaderClauses} )
+            {parser with state= HeaderClausesInit} )
+      | HeaderClausesInit -> (
+        match c with
+        | '0' .. '9' ->
+            { parser with
+              state= HeaderClauses
+            ; num_clauses= int_of_char c - int_of_char '0' }
+        | _ ->
+            parser )
       | HeaderClauses -> (
         match c with
         | '0' .. '9' ->
@@ -165,6 +174,8 @@ let print_state state =
       print_string "HeaderCNF"
   | HeaderVars ->
       print_string "HeaderVars"
+  | HeaderClausesInit ->
+      print_string "HeaderClausesInit"
   | HeaderClauses ->
       print_string "HeaderClauses"
   | ClauseInit ->
