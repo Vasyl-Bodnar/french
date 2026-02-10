@@ -4,7 +4,8 @@
 open Sat
 
 type state =
-  | Comment
+  | CommentHeader
+  | CommentClause
   | Header
   | HeaderC
   | HeaderCN
@@ -34,7 +35,7 @@ let parse_dimacs s =
       | Init -> (
         match c with
         | 'c' ->
-            {parser with state= Comment}
+            {parser with state= CommentHeader}
         | 'p' ->
             {parser with state= Header}
         | _ ->
@@ -141,15 +142,19 @@ let parse_dimacs s =
                     raise Impossible ) }
         | _ ->
             {parser with state= VarInit} )
-      | Comment -> (
-        match c with '\n' -> {parser with state= Init} | _ -> parser ) )
+      | CommentHeader -> (
+        match c with '\n' -> {parser with state= Init} | _ -> parser )
+      | CommentClause -> (
+        match c with '\n' -> {parser with state= ClauseInit} | _ -> parser ) )
     {state= Init; formula= []; num_clauses= 0; num_vars= 0}
     s
 
 let print_state state =
   match state with
-  | Comment ->
-      print_string "Comment"
+  | CommentHeader ->
+      print_string "CommentHeader"
+  | CommentClause ->
+      print_string "CommentClause"
   | Header ->
       print_string "Header"
   | HeaderC ->
