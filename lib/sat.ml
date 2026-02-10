@@ -22,7 +22,7 @@ let anneal (temp : float) (iterations : int) (inputs : bool array)
   let rec inn temp iter all_iters err =
     if err = 0 then (err, all_iters)
     else if temp < 0.01 then (err, all_iters)
-    else if iter = 0 then inn (temp *. 0.85) iterations all_iters err
+    else if iter = 0 then inn (temp *. 0.95) iterations all_iters err
     else
       let i = Random.int (Array.length inputs) in
       inputs.(i) <- not inputs.(i) ;
